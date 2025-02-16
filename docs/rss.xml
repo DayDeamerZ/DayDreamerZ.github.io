@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io</link></image><lastBuildDate>Sun, 16 Feb 2025 14:15:49 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>php端口扫描工具</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/php-duan-kou-sao-miao-gong-ju.html</link><description>
-php端口扫描工具
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io</link></image><lastBuildDate>Sun, 16 Feb 2025 14:27:59 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>php端口扫描工具</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/php-duan-kou-sao-miao-gong-ju.html</link><description>
+## php端口扫描工具
 
-`&lt;?php
+```php
+&lt;?php
 
 //函数区
 
@@ -111,8 +112,5 @@ getSomePorts('219.231.0.101', 1, 100, 'tcp');
 
 //getOnePort('ip地址', 端口号, '套接字方法', 端口扫描速度&lt;默认0.1s&gt;)
 //getSomePort('ip地址', 起始端口号, 结束端口号, '套接字方法', 端口扫描速度&lt;默认0.1s&gt;, 扫描睡眠间隔&lt;默认0s&gt;)   扫描睡眠间隔--用于防止主机屏蔽--调高安全--降低速度
-?&gt;`
-
-
-
-。</description><guid isPermaLink="true">https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/php-duan-kou-sao-miao-gong-ju.html</guid><pubDate>Sun, 16 Feb 2025 14:12:23 +0000</pubDate></item></channel></rss>
+?&gt;
+```。</description><guid isPermaLink="true">https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/php-duan-kou-sao-miao-gong-ju.html</guid><pubDate>Sun, 16 Feb 2025 14:12:23 +0000</pubDate></item></channel></rss>

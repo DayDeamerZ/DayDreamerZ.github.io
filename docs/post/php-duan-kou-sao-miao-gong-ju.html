@@ -11,9 +11,10 @@
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
 <meta name="description" content="
-php端口扫描工具
+## php端口扫描工具
 
-`<?php
+```php
+<?php
 
 //函数区
 
@@ -122,16 +123,14 @@ getSomePorts('219.231.0.101', 1, 100, 'tcp');
 
 //getOnePort('ip地址', 端口号, '套接字方法', 端口扫描速度<默认0.1s>)
 //getSomePort('ip地址', 起始端口号, 结束端口号, '套接字方法', 端口扫描速度<默认0.1s>, 扫描睡眠间隔<默认0s>)   扫描睡眠间隔--用于防止主机屏蔽--调高安全--降低速度
-?>`
-
-
-
-。">
+?>
+```。">
 <meta property="og:title" content="php端口扫描工具">
 <meta property="og:description" content="
-php端口扫描工具
+## php端口扫描工具
 
-`<?php
+```php
+<?php
 
 //函数区
 
@@ -240,16 +239,13 @@ getSomePorts('219.231.0.101', 1, 100, 'tcp');
 
 //getOnePort('ip地址', 端口号, '套接字方法', 端口扫描速度<默认0.1s>)
 //getSomePort('ip地址', 起始端口号, 结束端口号, '套接字方法', 端口扫描速度<默认0.1s>, 扫描睡眠间隔<默认0s>)   扫描睡眠间隔--用于防止主机屏蔽--调高安全--降低速度
-?>`
-
-
-
-。">
+?>
+```。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/php-duan-kou-sao-miao-gong-ju.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
 <title>php端口扫描工具</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -273,7 +269,17 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     body {padding: 8px;}
     .postTitle{font-size:24px;}
 }
-
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
 </style>
 
 
@@ -305,104 +311,117 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>php端口扫描工具</p>
-<p>`&lt;?php</p>
-<p>//函数区</p>
-<p>function isPortOpenTCP($ip, $port, $showMessage = false, $searchSpeed = 1) {<br>
-//isPortOpen($ip, $port, true);  打印每条端口查询信息<br>
-//ipPortOpen($ip, $port, false);  不打印端口查询信息<br>
-$connection = <a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/fsockopen/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/fsockopen">@fsockopen</a>($ip, $port, $errno, $errstr, $searchSpeed);<br>
-if ($connection){<br>
-fclose($connection);<br>
-if ($showMessage) {<br>
-echo "扫描到 $ip 的 $port 端口打开<br>";<br>
-}<br>
-return 1;<br>
-} else {<br>
-if ($showMessage) {<br>
-echo "扫描到 $ip 的 $port 端口关闭&amp;nbsp&amp;nbsp&amp;nbsp连接错误: $errno - $errstr<br>";<br>
-}<br>
-return 0;<br>
-}<br>
-}//端口数据返回判断，有数据返回则端口开启，无则是关闭</p>
-<p>function isPortOpenUDP($ip, $port, $showMessage = false, $searchSpeed = 1) {<br>
-//isPortOpen($ip, $port, true);  打印每条端口查询信息<br>
-//ipPortOpen($ip, $port, false);  不打印端口查询信息<br>
-$connection = @stream_socket_client("udp://$ip:$port", $errno, $errstr, $searchSpeed, STREAM_CLIENT_CONNECT);<br>
-if ($connection){<br>
-fclose($connection);<br>
-if ($showMessage) {<br>
-echo "扫描到 $ip 的 $port 端口打开<br>";<br>
-}<br>
-return 1;<br>
-} else {<br>
-if ($showMessage) {<br>
-echo "扫描到 $ip 的 $port 端口关闭<br>连接错误: $errno - $errstr<br>";<br>
-}<br>
-return 0;<br>
-}<br>
-}//端口数据返回判断，有数据返回则端口开启，无则是关闭</p>
-<p>function getOnePort($searchIpA, $portA, $udpORtcp = "UDP"){<br>
-echo "开始扫描端口 $portA<br>";<br>
-$isPortOpen = ($udpORtcp=="UDP"||$udpORtcp == "udp")?isPortOpenUDP($searchIpA, $portA, true):isPortOpenTCP($searchIpA, $portA, true);//此处打印结果<br>
-if ($udpORtcp == "UDP" || $udpORtcp == "udp"){<br>
-//UDP执行区</p>
-<p>} else if($udpORtcp == "TCP" || $udpORtcp == "tcp") {<br>
-//TCP执行区</p>
-<p>} else {<br>
-//0执行区<br>
-echo "未选择UDP或TCP参数";<br>
-exit(-1);<br>
-}<br>
-}//获取指定ip地址的 一个 端口开关情况</p>
-<p>function getSomePorts($searchIpB, $portSarB, $portEndB, $udpORtcp = "UDP", $searchSpeed=0.1, $sleepTime = 0){<br>
-//端口扫描，遍历所有端口信息<br>
-echo "开始遍历 $searchIpB 的 $portSarB 到 $portEndB 端口<br>";<br>
-if($portSarB&gt;$portEndB){<br>
-echo "开始端口应小于结束端口！<br>";<br>
-exit(-1);<br>
-}<br>
-$portINF = [];<br>
-if ($udpORtcp == "UDP" || $udpORtcp == "udp"){<br>
-//UDP执行区<br>
-echo "UDP方法扫描<br>";<br>
-for ($curPort = $portSarB; $curPort &lt;= $portEndB; $curPort++) {<br>
-sleep($sleepTime);//扫描间隔时间，单位s //防止被目标主机ban掉，请适当调高该参数<br>
-$isPortOpenUDP = isPortOpenUDP($searchIpB, $curPort, false, $searchSpeed);//此处可以打印单步结果<br>
-$portINF[$curPort-$portSarB][0] = $curPort;<br>
-$portINF[$curPort-$portSarB][1] = $isPortOpenUDP;<br>
-}<br>
-} else if($udpORtcp == "TCP" || $udpORtcp == "tcp") {<br>
-//TCP执行区<br>
-echo "TCP方法扫描<br>";<br>
-for ($curPort = $portSarB; $curPort &lt;= $portEndB; $curPort++) {<br>
-sleep($sleepTime);//扫描间隔时间，单位s //防止被目标主机ban掉，请适当调高该参数<br>
-$isPortOpenTCP = isPortOpenTCP($searchIpB, $curPort, false, $searchSpeed);//此处可以打印单步结果<br>
-$portINF[$curPort-$portSarB][0] = $curPort;<br>
-$portINF[$curPort-$portSarB][1] = $isPortOpenTCP;<br>
-}<br>
-} else {<br>
-//0执行区<br>
-echo "未选择UDP或TCP参数";<br>
-exit(-1);<br>
-}<br>
-outputPortsINFwithSimple($portINF);//此处可简单打印总和结果<br>
-}//获取指定ip地址的 多个 端口开关情况，并两列输出，结果存储在函数内部大小为2×n的portINF数组中</p>
-<p>function outputPortsINFwithSimple($portINF){<br>
-//输出格式：简单输出表格，直接在html格式显示，简陋减少服务器负担<br>
-for ($i = 0; $i &lt; count($portINF); $i++) {<br>
-for ($j = 0; $j &lt; count($portINF[$i]); $j++) {<br>
-echo $portINF[$i][$j] . "    ";<br>
-}<br>
-echo "<br>";<br>
-}<br>
-}//简单输出portINF数组，适用于低配环境，减小服务器压力</p>
-<p>//执行区</p>
-<p>getOnePort("219.231.0.101", 443, "tcp");<br>
-getSomePorts("219.231.0.101", 1, 100, "tcp");</p>
-<p>//getOnePort("ip地址", 端口号, "套接字方法", 端口扫描速度&lt;默认0.1s&gt;)<br>
-//getSomePort("ip地址", 起始端口号, 结束端口号, "套接字方法", 端口扫描速度&lt;默认0.1s&gt;, 扫描睡眠间隔&lt;默认0s&gt;)   扫描睡眠间隔--用于防止主机屏蔽--调高安全--降低速度<br>
-?&gt;`</p></div>
+<div class="markdown-body" id="postBody"><h2>php端口扫描工具</h2>
+<div class="highlight highlight-text-html-php"><pre class="notranslate"><span class="pl-ent">&lt;?php</span>
+
+<span class="pl-c">//函数区</span>
+
+<span class="pl-k">function</span> <span class="pl-en">isPortOpenTCP</span>(<span class="pl-s1"><span class="pl-c1">$</span>ip</span>, <span class="pl-s1"><span class="pl-c1">$</span>port</span>, <span class="pl-s1"><span class="pl-c1">$</span>showMessage</span> = <span class="pl-c1">false</span>, <span class="pl-s1"><span class="pl-c1">$</span>searchSpeed</span> = <span class="pl-c1">1</span>) {
+   <span class="pl-c">//isPortOpen($ip, $port, true);  打印每条端口查询信息</span>
+   <span class="pl-c">//ipPortOpen($ip, $port, false);  不打印端口查询信息</span>
+    <span class="pl-s1"><span class="pl-c1">$</span>connection</span> = @<span class="pl-en">fsockopen</span>(<span class="pl-s1"><span class="pl-c1">$</span>ip</span>, <span class="pl-s1"><span class="pl-c1">$</span>port</span>, <span class="pl-s1"><span class="pl-c1">$</span>errno</span>, <span class="pl-s1"><span class="pl-c1">$</span>errstr</span>, <span class="pl-s1"><span class="pl-c1">$</span>searchSpeed</span>);
+    <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>connection</span>){
+        <span class="pl-en">fclose</span>(<span class="pl-s1"><span class="pl-c1">$</span>connection</span>);
+        <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>showMessage</span>) {
+            <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">扫描到 </span><span class="pl-s1"><span class="pl-c1">$</span>ip</span><span class="pl-s"> 的 </span><span class="pl-s1"><span class="pl-c1">$</span>port</span><span class="pl-s"> 端口打开&lt;br&gt;</span>"</span>;
+        }
+        <span class="pl-k">return</span> <span class="pl-c1">1</span>;
+    } <span class="pl-k">else</span> {
+        <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>showMessage</span>) {
+            <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">扫描到 </span><span class="pl-s1"><span class="pl-c1">$</span>ip</span><span class="pl-s"> 的 </span><span class="pl-s1"><span class="pl-c1">$</span>port</span><span class="pl-s"> 端口关闭&amp;nbsp&amp;nbsp&amp;nbsp连接错误: </span><span class="pl-s1"><span class="pl-c1">$</span>errno</span><span class="pl-s"> - </span><span class="pl-s1"><span class="pl-c1">$</span>errstr</span><span class="pl-s">&lt;br&gt;</span>"</span>;
+        }
+        <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+    }
+}<span class="pl-c">//端口数据返回判断，有数据返回则端口开启，无则是关闭</span>
+
+
+<span class="pl-k">function</span> <span class="pl-en">isPortOpenUDP</span>(<span class="pl-s1"><span class="pl-c1">$</span>ip</span>, <span class="pl-s1"><span class="pl-c1">$</span>port</span>, <span class="pl-s1"><span class="pl-c1">$</span>showMessage</span> = <span class="pl-c1">false</span>, <span class="pl-s1"><span class="pl-c1">$</span>searchSpeed</span> = <span class="pl-c1">1</span>) {
+   <span class="pl-c">//isPortOpen($ip, $port, true);  打印每条端口查询信息</span>
+   <span class="pl-c">//ipPortOpen($ip, $port, false);  不打印端口查询信息</span>
+    <span class="pl-s1"><span class="pl-c1">$</span>connection</span> = @<span class="pl-en">stream_socket_client</span>(<span class="pl-s">"<span class="pl-s">udp://</span><span class="pl-s1"><span class="pl-c1">$</span>ip</span><span class="pl-s">:</span><span class="pl-s1"><span class="pl-c1">$</span>port</span>"</span>, <span class="pl-s1"><span class="pl-c1">$</span>errno</span>, <span class="pl-s1"><span class="pl-c1">$</span>errstr</span>, <span class="pl-s1"><span class="pl-c1">$</span>searchSpeed</span>, <span class="pl-c1">STREAM_CLIENT_CONNECT</span>);
+    <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>connection</span>){
+        <span class="pl-en">fclose</span>(<span class="pl-s1"><span class="pl-c1">$</span>connection</span>);
+        <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>showMessage</span>) {
+            <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">扫描到 </span><span class="pl-s1"><span class="pl-c1">$</span>ip</span><span class="pl-s"> 的 </span><span class="pl-s1"><span class="pl-c1">$</span>port</span><span class="pl-s"> 端口打开&lt;br&gt;</span>"</span>;
+        }
+        <span class="pl-k">return</span> <span class="pl-c1">1</span>;
+    } <span class="pl-k">else</span> {
+        <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>showMessage</span>) {
+            <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">扫描到 </span><span class="pl-s1"><span class="pl-c1">$</span>ip</span><span class="pl-s"> 的 </span><span class="pl-s1"><span class="pl-c1">$</span>port</span><span class="pl-s"> 端口关闭&lt;br&gt;连接错误: </span><span class="pl-s1"><span class="pl-c1">$</span>errno</span><span class="pl-s"> - </span><span class="pl-s1"><span class="pl-c1">$</span>errstr</span><span class="pl-s">&lt;br&gt;</span>"</span>;
+        }
+        <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+    }
+}<span class="pl-c">//端口数据返回判断，有数据返回则端口开启，无则是关闭</span>
+
+<span class="pl-k">function</span> <span class="pl-en">getOnePort</span>(<span class="pl-s1"><span class="pl-c1">$</span>searchIpA</span>, <span class="pl-s1"><span class="pl-c1">$</span>portA</span>, <span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> = <span class="pl-s">"<span class="pl-s">UDP</span>"</span>){
+   <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">开始扫描端口 </span><span class="pl-s1"><span class="pl-c1">$</span>portA</span><span class="pl-s">&lt;br&gt;</span>"</span>;
+   <span class="pl-s1"><span class="pl-c1">$</span>isPortOpen</span> = (<span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span>==<span class="pl-s">"<span class="pl-s">UDP</span>"</span>||<span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">udp</span>"</span>)?<span class="pl-en">isPortOpenUDP</span>(<span class="pl-s1"><span class="pl-c1">$</span>searchIpA</span>, <span class="pl-s1"><span class="pl-c1">$</span>portA</span>, <span class="pl-c1">true</span>):<span class="pl-en">isPortOpenTCP</span>(<span class="pl-s1"><span class="pl-c1">$</span>searchIpA</span>, <span class="pl-s1"><span class="pl-c1">$</span>portA</span>, <span class="pl-c1">true</span>);<span class="pl-c">//此处打印结果</span>
+   <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">UDP</span>"</span> || <span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">udp</span>"</span>){
+      <span class="pl-c">//UDP执行区</span>
+
+   } <span class="pl-k">else</span> <span class="pl-k">if</span>(<span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">TCP</span>"</span> || <span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">tcp</span>"</span>) {
+      <span class="pl-c">//TCP执行区</span>
+
+   } <span class="pl-k">else</span> {
+      <span class="pl-c">//0执行区</span>
+      <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">未选择UDP或TCP参数</span>"</span>;
+      <span class="pl-en">exit</span>(-<span class="pl-c1">1</span>);
+   }
+}<span class="pl-c">//获取指定ip地址的 一个 端口开关情况</span>
+
+<span class="pl-k">function</span> <span class="pl-en">getSomePorts</span>(<span class="pl-s1"><span class="pl-c1">$</span>searchIpB</span>, <span class="pl-s1"><span class="pl-c1">$</span>portSarB</span>, <span class="pl-s1"><span class="pl-c1">$</span>portEndB</span>, <span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> = <span class="pl-s">"<span class="pl-s">UDP</span>"</span>, <span class="pl-s1"><span class="pl-c1">$</span>searchSpeed</span>=<span class="pl-c1">0.1</span>, <span class="pl-s1"><span class="pl-c1">$</span>sleepTime</span> = <span class="pl-c1">0</span>){
+   <span class="pl-c">//端口扫描，遍历所有端口信息</span>
+   <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">开始遍历 </span><span class="pl-s1"><span class="pl-c1">$</span>searchIpB</span><span class="pl-s"> 的 </span><span class="pl-s1"><span class="pl-c1">$</span>portSarB</span><span class="pl-s"> 到 </span><span class="pl-s1"><span class="pl-c1">$</span>portEndB</span><span class="pl-s"> 端口&lt;br&gt;</span>"</span>;
+   <span class="pl-k">if</span>(<span class="pl-s1"><span class="pl-c1">$</span>portSarB</span>&gt;<span class="pl-s1"><span class="pl-c1">$</span>portEndB</span>){
+      <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">开始端口应小于结束端口！&lt;br&gt;</span>"</span>;
+      <span class="pl-en">exit</span>(-<span class="pl-c1">1</span>);
+   }
+   <span class="pl-s1"><span class="pl-c1">$</span>portINF</span> = [];
+   <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">UDP</span>"</span> || <span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">udp</span>"</span>){
+      <span class="pl-c">//UDP执行区</span>
+      <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">UDP方法扫描&lt;br&gt;</span>"</span>;
+      <span class="pl-k">for</span> (<span class="pl-s1"><span class="pl-c1">$</span>curPort</span> = <span class="pl-s1"><span class="pl-c1">$</span>portSarB</span>; <span class="pl-s1"><span class="pl-c1">$</span>curPort</span> &lt;= <span class="pl-s1"><span class="pl-c1">$</span>portEndB</span>; <span class="pl-s1"><span class="pl-c1">$</span>curPort</span>++) {
+         <span class="pl-en">sleep</span>(<span class="pl-s1"><span class="pl-c1">$</span>sleepTime</span>);<span class="pl-c">//扫描间隔时间，单位s //防止被目标主机ban掉，请适当调高该参数</span>
+         <span class="pl-s1"><span class="pl-c1">$</span>isPortOpenUDP</span> = <span class="pl-en">isPortOpenUDP</span>(<span class="pl-s1"><span class="pl-c1">$</span>searchIpB</span>, <span class="pl-s1"><span class="pl-c1">$</span>curPort</span>, <span class="pl-c1">false</span>, <span class="pl-s1"><span class="pl-c1">$</span>searchSpeed</span>);<span class="pl-c">//此处可以打印单步结果</span>
+         <span class="pl-s1"><span class="pl-c1">$</span>portINF</span>[<span class="pl-s1"><span class="pl-c1">$</span>curPort</span>-<span class="pl-s1"><span class="pl-c1">$</span>portSarB</span>][<span class="pl-c1">0</span>] = <span class="pl-s1"><span class="pl-c1">$</span>curPort</span>;
+         <span class="pl-s1"><span class="pl-c1">$</span>portINF</span>[<span class="pl-s1"><span class="pl-c1">$</span>curPort</span>-<span class="pl-s1"><span class="pl-c1">$</span>portSarB</span>][<span class="pl-c1">1</span>] = <span class="pl-s1"><span class="pl-c1">$</span>isPortOpenUDP</span>;
+      }
+   } <span class="pl-k">else</span> <span class="pl-k">if</span>(<span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">TCP</span>"</span> || <span class="pl-s1"><span class="pl-c1">$</span>udpORtcp</span> == <span class="pl-s">"<span class="pl-s">tcp</span>"</span>) {
+      <span class="pl-c">//TCP执行区</span>
+      <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">TCP方法扫描&lt;br&gt;</span>"</span>;
+      <span class="pl-k">for</span> (<span class="pl-s1"><span class="pl-c1">$</span>curPort</span> = <span class="pl-s1"><span class="pl-c1">$</span>portSarB</span>; <span class="pl-s1"><span class="pl-c1">$</span>curPort</span> &lt;= <span class="pl-s1"><span class="pl-c1">$</span>portEndB</span>; <span class="pl-s1"><span class="pl-c1">$</span>curPort</span>++) {
+         <span class="pl-en">sleep</span>(<span class="pl-s1"><span class="pl-c1">$</span>sleepTime</span>);<span class="pl-c">//扫描间隔时间，单位s //防止被目标主机ban掉，请适当调高该参数</span>
+         <span class="pl-s1"><span class="pl-c1">$</span>isPortOpenTCP</span> = <span class="pl-en">isPortOpenTCP</span>(<span class="pl-s1"><span class="pl-c1">$</span>searchIpB</span>, <span class="pl-s1"><span class="pl-c1">$</span>curPort</span>, <span class="pl-c1">false</span>, <span class="pl-s1"><span class="pl-c1">$</span>searchSpeed</span>);<span class="pl-c">//此处可以打印单步结果</span>
+         <span class="pl-s1"><span class="pl-c1">$</span>portINF</span>[<span class="pl-s1"><span class="pl-c1">$</span>curPort</span>-<span class="pl-s1"><span class="pl-c1">$</span>portSarB</span>][<span class="pl-c1">0</span>] = <span class="pl-s1"><span class="pl-c1">$</span>curPort</span>;
+         <span class="pl-s1"><span class="pl-c1">$</span>portINF</span>[<span class="pl-s1"><span class="pl-c1">$</span>curPort</span>-<span class="pl-s1"><span class="pl-c1">$</span>portSarB</span>][<span class="pl-c1">1</span>] = <span class="pl-s1"><span class="pl-c1">$</span>isPortOpenTCP</span>;
+      }
+   } <span class="pl-k">else</span> {
+      <span class="pl-c">//0执行区</span>
+      <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">未选择UDP或TCP参数</span>"</span>;
+      <span class="pl-en">exit</span>(-<span class="pl-c1">1</span>);
+   }
+   <span class="pl-en">outputPortsINFwithSimple</span>(<span class="pl-s1"><span class="pl-c1">$</span>portINF</span>);<span class="pl-c">//此处可简单打印总和结果</span>
+}<span class="pl-c">//获取指定ip地址的 多个 端口开关情况，并两列输出，结果存储在函数内部大小为2×n的portINF数组中</span>
+
+<span class="pl-k">function</span> <span class="pl-en">outputPortsINFwithSimple</span>(<span class="pl-s1"><span class="pl-c1">$</span>portINF</span>){
+   <span class="pl-c">//输出格式：简单输出表格，直接在html格式显示，简陋减少服务器负担</span>
+   <span class="pl-k">for</span> (<span class="pl-s1"><span class="pl-c1">$</span>i</span> = <span class="pl-c1">0</span>; <span class="pl-s1"><span class="pl-c1">$</span>i</span> &lt; <span class="pl-en">count</span>(<span class="pl-s1"><span class="pl-c1">$</span>portINF</span>); <span class="pl-s1"><span class="pl-c1">$</span>i</span>++) {
+      <span class="pl-k">for</span> (<span class="pl-s1"><span class="pl-c1">$</span>j</span> = <span class="pl-c1">0</span>; <span class="pl-s1"><span class="pl-c1">$</span>j</span> &lt; <span class="pl-en">count</span>(<span class="pl-s1"><span class="pl-c1">$</span>portINF</span>[<span class="pl-s1"><span class="pl-c1">$</span>i</span>]); <span class="pl-s1"><span class="pl-c1">$</span>j</span>++) {
+         <span class="pl-k">echo</span> <span class="pl-s1"><span class="pl-c1">$</span>portINF</span>[<span class="pl-s1"><span class="pl-c1">$</span>i</span>][<span class="pl-s1"><span class="pl-c1">$</span>j</span>] . <span class="pl-s">"<span class="pl-s">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>"</span>;
+      }
+      <span class="pl-k">echo</span> <span class="pl-s">"<span class="pl-s">&lt;br&gt;</span>"</span>;
+   }
+}<span class="pl-c">//简单输出portINF数组，适用于低配环境，减小服务器压力</span>
+
+
+<span class="pl-c">//执行区</span>
+
+<span class="pl-en">getOnePort</span>(<span class="pl-s">"<span class="pl-s">219.231.0.101</span>"</span>, <span class="pl-c1">443</span>, <span class="pl-s">"<span class="pl-s">tcp</span>"</span>);
+<span class="pl-en">getSomePorts</span>(<span class="pl-s">"<span class="pl-s">219.231.0.101</span>"</span>, <span class="pl-c1">1</span>, <span class="pl-c1">100</span>, <span class="pl-s">"<span class="pl-s">tcp</span>"</span>);
+
+<span class="pl-c">//getOnePort("ip地址", 端口号, "套接字方法", 端口扫描速度&lt;默认0.1s&gt;)</span>
+<span class="pl-c">//getSomePort("ip地址", 起始端口号, 结束端口号, "套接字方法", 端口扫描速度&lt;默认0.1s&gt;, 扫描睡眠间隔&lt;默认0s&gt;)   扫描睡眠间隔--用于防止主机屏蔽--调高安全--降低速度</span>
+<span class="pl-ent">?&gt;</span></pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
@@ -427,7 +446,7 @@ if(""!=""){
 </script></div>
 </body>
 <script>
-var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
 var utterancesLoad=0;
 
 let themeSettings={
@@ -500,7 +519,70 @@ function iFrameLoading(){
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
 
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
 
 </script>
 
