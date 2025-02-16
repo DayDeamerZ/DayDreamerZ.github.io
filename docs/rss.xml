@@ -1,5 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DayDreamerZ的博客</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io</link><description>I'm DayDreamer,不做白日梦</description><copyright>DayDreamerZ的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io</link></image><lastBuildDate>Sun, 16 Feb 2025 14:44:22 +0000</lastBuildDate><managingEditor>DayDreamerZ的博客</managingEditor><ttl>60</ttl><webMaster>DayDreamerZ的博客</webMaster><item><title>移动端轮播图(无JS)</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/yi-dong-duan-lun-bo-tu-%28-wu-JS%29.html</link><description>```HTML
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DayDreamerZ的博客</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io</link><description>I'm DayDreamer,不做白日梦</description><copyright>DayDreamerZ的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io</link></image><lastBuildDate>Sun, 16 Feb 2025 14:55:54 +0000</lastBuildDate><managingEditor>DayDreamerZ的博客</managingEditor><ttl>60</ttl><webMaster>DayDreamerZ的博客</webMaster><item><title>LNMP部署网站于云服务器上线全流程实例-www.dongliqingdan.top（该域名已失效）</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/LNMP-bu-shu-wang-zhan-yu-yun-fu-wu-qi-shang-xian-quan-liu-cheng-shi-li--www.dongliqingdan.top%EF%BC%88-gai-yu-ming-yi-shi-xiao-%EF%BC%89.html</link><description># 准备工作
+## 1、云服务器：阿里云轻量级服务器
+原生配置：（购买服务器时勾选的自带配置）
+应用配置：
+
+![Image](https://github.com/user-attachments/assets/6f932dfd-04eb-4b56-ae74-66ef92cb9d8c)
+
+![Image](https://github.com/user-attachments/assets/abe2ec39-5fec-44dc-b59c-0a21188a23eb)
+
+![Image](https://github.com/user-attachments/assets/3560ffe6-3067-4daa-8765-4974d8775688)
+
+系统配置：
+
+![Image](https://github.com/user-attachments/assets/ba351199-6a93-4c9d-b56a-98be604f3131)
+
+## 2、域名
+购买域名：
+域名DNS解析：
+域名备案：
+
+## 3、服务器上线部署软件/平台
+目前了解到有：
+宝塔面板：操作简便，具有远程连接管理服务器的功能，镜像商店齐全，部署上线多次未果，暂时不推荐
+Nginx：是一种轻量级的http服务器，也是反向代理服务器，总之用起来有些复杂，不推荐
+tomact: 比较流行的Web 应用服务器, 实际上Tomcat是Apache 服务器的扩展，但运行时它是独立运行 ,  一般不作为部署普通html网页使用， 不推荐
+httpd：是apache软件包的名字，apache是超文本传输协议的主程序（http协议就是网站，端口默认80），配置文件简单易懂，推荐
+
+# 网页部署上线流程：
+## 1、准备好需要部署的文件
+对于我们使用的httpd方法来说，每一个html文件需要其对应的css文件与之处于同一级别目录中，js文件、resouse图片集同理如此。</description><guid isPermaLink="true">https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/LNMP-bu-shu-wang-zhan-yu-yun-fu-wu-qi-shang-xian-quan-liu-cheng-shi-li--www.dongliqingdan.top%EF%BC%88-gai-yu-ming-yi-shi-xiao-%EF%BC%89.html</guid><pubDate>Sun, 16 Feb 2025 14:55:29 +0000</pubDate></item><item><title>移动端轮播图(无JS)</title><link>https://DayDeamerZ.github.io/DayDreamerZ.github.io/post/yi-dong-duan-lun-bo-tu-%28-wu-JS%29.html</link><description>```HTML
 &lt;div id='banner-area'&gt;
     &lt;div id='banners-img'&gt;
       &lt;div class='img-area'&gt;
